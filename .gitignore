@@ -31,3 +31,7 @@ coverage
 
 # Ignore history folder
 .history
+
+# Ignore TAGS
+
+TAGS
