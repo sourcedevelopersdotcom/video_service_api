@@ -1,4 +1,4 @@
-module TitlePlotValidations
+module TitlePlotPresenceValidations
   extend ActiveSupport::Concern
 
   included do

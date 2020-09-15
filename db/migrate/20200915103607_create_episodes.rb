@@ -8,5 +8,8 @@ class CreateEpisodes < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+
+    add_index :episodes, %i[season_id number], unique: true
+    add_index :episodes, %i[season_id title], unique: true
   end
 end

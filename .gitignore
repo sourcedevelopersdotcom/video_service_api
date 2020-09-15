@@ -35,3 +35,7 @@ coverage
 # Ignore TAGS
 
 TAGS
+
+# Ignore VSCode files
+
+.vscode/*
