@@ -1,0 +1,1 @@
+select * from purchases where created_at >= DATE_SUB(NOW(), INTERVAL 3 DAY)

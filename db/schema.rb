@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_16_152113) do
+ActiveRecord::Schema.define(version: 2020_09_16_204828) do
 
   create_table "contents", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "contentable_type", null: false
@@ -79,4 +79,8 @@ ActiveRecord::Schema.define(version: 2020_09_16_152113) do
   add_foreign_key "options", "contents"
   add_foreign_key "purchases", "options"
   add_foreign_key "purchases", "users"
+
+  create_view "libraries", sql_definition: <<-SQL
+      select `purchases`.`id` AS `id`,`purchases`.`option_id` AS `option_id`,`purchases`.`user_id` AS `user_id`,`purchases`.`created_at` AS `created_at`,`purchases`.`updated_at` AS `updated_at` from `purchases` where (`purchases`.`created_at` >= (now() - interval 3 day))
+  SQL
 end
