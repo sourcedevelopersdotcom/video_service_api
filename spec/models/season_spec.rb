@@ -5,7 +5,8 @@ RSpec.describe Season, type: :model do
     it_behaves_like 'contentable'
     it_behaves_like 'title_plot'
 
-    it { should have_many(:episodes).dependent(:destroy) }
+    it { should have_many(:options) }
+    it { should have_many(:episodes).dependent(:destroy).order(:number) }
 
     it { should validate_presence_of(:number) }
     it { should have_db_index(%i[number title]).unique }
@@ -32,7 +33,7 @@ RSpec.describe Season, type: :model do
     let(:season) { create(:season) }
     let(:season2) { create(:season2) }
 
-    it 'creates both seasons' do
+    it 'should create both seasons' do
       expect(season).to be_valid
       expect(season2).to be_valid
     end

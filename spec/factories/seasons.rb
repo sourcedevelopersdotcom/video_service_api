@@ -7,7 +7,7 @@ FactoryBot.define do
 
   factory :season2, class: Season do
     title { 'Game of Thrones' }
-    plot { "Don't want to be the king" }
+    plot { 'Birth of dragons' }
     number { 2 }
   end
 end

@@ -4,6 +4,7 @@ RSpec.describe Movie, type: :model do
   describe 'should have structure restrictions' do
     it_behaves_like 'contentable'
     it_behaves_like 'title_plot'
+    it { should have_many(:options) }
     it { should have_db_index(:title).unique }
   end
 

@@ -234,6 +234,7 @@ DEPENDENCIES
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.3)
   ripper-tags
+  rspec-core
   rspec-rails
   shoulda-matchers (~> 4.0)
   simplecov

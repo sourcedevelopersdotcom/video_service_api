@@ -31,6 +31,7 @@ group :development, :test do
   gem 'solargraph'
   gem 'database_cleaner'
   gem 'rspec-rails'
+  gem 'rspec-core'
   gem 'faker'
   gem 'shoulda-matchers', '~> 4.0'
   gem 'factory_bot_rails'

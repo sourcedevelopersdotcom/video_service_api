@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :content do
-    contentable { nil }
+    contentable { |a| a.association(:movie) }
   end
 end

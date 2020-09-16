@@ -39,3 +39,7 @@ TAGS
 # Ignore VSCode files
 
 .vscode/*
+
+# Ignore hidden files
+
+.*
