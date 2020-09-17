@@ -5,5 +5,5 @@ class Movie < ApplicationRecord
 
   validates_uniqueness_of :title, case_sensitive: false
 
-  default_scope { order(created_at: :desc) }
+  default_scope { order(created_at: :asc) }
 end

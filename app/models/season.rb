@@ -7,5 +7,5 @@ class Season < ApplicationRecord
   validates_presence_of :number
   validates_uniqueness_of :title, scope: :number, case_sensitive: false
 
-  default_scope { order(created_at: :desc) }
+  default_scope { order(created_at: :asc) }
 end

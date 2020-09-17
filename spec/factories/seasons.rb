@@ -10,4 +10,10 @@ FactoryBot.define do
     plot { 'Birth of dragons' }
     number { 2 }
   end
+
+  factory :season_new, class: Season do
+    title { Faker::Movies.title }
+    plot { Faker::Movies.quote }
+    number { Faker::Number.decimal(l_digits: 2) }
+  end
 end
