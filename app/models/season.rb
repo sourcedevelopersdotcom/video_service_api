@@ -8,4 +8,19 @@ class Season < ApplicationRecord
   validates_uniqueness_of :title, scope: :number, case_sensitive: false
 
   default_scope { order(created_at: :asc) }
+
+  after_commit :create_json_cache
+
+  def self.cache_key(_seasons)
+    {
+      serializer: 'seasons',
+      stat_record: Season.maximum(:updated_at)
+    }
+  end
+
+  private
+
+  def create_json_cache
+    CreateSeasonsJsonCacheJob.perform_later(self)
+  end
 end

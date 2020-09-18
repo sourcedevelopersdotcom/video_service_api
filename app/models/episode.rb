@@ -1,5 +1,5 @@
 class Episode < ApplicationRecord
-  belongs_to :season
+  belongs_to :season, touch: true
   include TitlePlotPresenceValidations
 
   validates_presence_of :number, :season

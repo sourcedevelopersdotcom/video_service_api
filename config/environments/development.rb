@@ -20,9 +20,10 @@ Rails.application.configure do
       'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
   else
-    config.action_controller.perform_caching = false
+    config.action_controller.perform_caching = true
 
-    config.cache_store = :null_store
+    # config.cache_store = :redis_cache_store, {driver: :hiredis, url: "redis://127.0.0.1:6379/0"}
+    config.cache_store = :redis_cache_store, { url: 'redis://localhost:6379/0' }
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
@@ -41,7 +42,6 @@ Rails.application.configure do
 
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
-
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
