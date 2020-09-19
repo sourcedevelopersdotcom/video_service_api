@@ -3,11 +3,7 @@ class ContentSerializer
   cache_options enabled: true, cache_length: 1.hour
   attributes :contentable_type
   attributes :contentable do |obj|
-    if obj.contentable_type == 'Movie'
-      MovieSerializer.new(obj.contentable)
-    else
-      SeasonSerializer.new(obj.contentable)
-    end
+    obj.contentable_type == 'Movie' ? MovieSerializer.new(obj.contentable) : SeasonSerializer.new(obj.contentable)
   end
 
   has_many :options, serializer: OptionSerializer

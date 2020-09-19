@@ -9,5 +9,7 @@ class CreateContentsJsonCacheJob < ApplicationJob
     Rails.cache.fetch(Content.cache_key(contents)) do
       ContentSerializer.new(contents).serializable_hash.to_json
     end
+    Rails.cache.delete_matched('serializer=users*')
+    User.all.each { |user| CreatePurchasesJsonCacheJob.perform_later(user) }
   end
 end

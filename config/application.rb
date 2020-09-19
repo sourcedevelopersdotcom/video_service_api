@@ -36,6 +36,9 @@ module VideoServiceApi
     config.active_job.queue_adapter = :sidekiq
     config.after_initialize do
       CreateMoviesJsonCacheJob.perform_later
+      CreateEpisodesJsonCacheJob.perform_later
+      CreateSeasonsJsonCacheJob.perform_later
+      CreateContentsJsonCacheJob.perform_later
     end
   end
 end

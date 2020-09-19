@@ -14,5 +14,11 @@ FactoryBot.define do
     factory :purchase_old do
       created_at { Time.now - 4.days }
     end
+    factory :purchase_one_day_old do
+      created_at { Time.now - 1.days }
+    end
+    factory :purchase_two_days_old do
+      created_at { Time.now - 2.days }
+    end
   end
 end

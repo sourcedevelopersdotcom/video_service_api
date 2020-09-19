@@ -5,7 +5,7 @@ FactoryBot.define do
   end
 
   factory :movie_new, class: Movie do
-    title { Faker::Movie.title }
+    title { Faker::Movie.unique.title }
     plot { Faker::Movie.quote }
   end
 end

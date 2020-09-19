@@ -3,8 +3,10 @@ class ContentsController < ApplicationController
   def index
     @contents = Content.all_order_by_creation
 
+    options = { include: [:options] }
+
     json = Rails.cache.fetch(Content.cache_key(@contents)) do
-      ContentSerializer.new(@contents).serializable_hash.to_json
+      ContentSerializer.new(@contents, options).serializable_hash.to_json
     end
 
     render json: json

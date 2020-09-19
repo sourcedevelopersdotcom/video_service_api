@@ -12,8 +12,8 @@ FactoryBot.define do
   end
 
   factory :season_new, class: Season do
-    title { Faker::Movies.title }
-    plot { Faker::Movies.quote }
-    number { Faker::Number.decimal(l_digits: 2) }
+    title { Faker::Movie.unique.title }
+    plot { Faker::Movie.quote }
+    number { Faker::Number.unique.decimal(l_digits: 2) }
   end
 end

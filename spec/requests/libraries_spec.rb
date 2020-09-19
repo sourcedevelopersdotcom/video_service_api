@@ -1,30 +1,38 @@
 require 'rails_helper'
 
 RSpec.describe '/libraries', type: :request do
-  # This should return the minimal set of attributes required to create a valid
-  # Library. As you add validations to Library, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
-  end
-
-  let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
-  end
-
-  # This should return the minimal set of values that should be in the headers
-  # in order to pass any filters (e.g. authentication) defined in
-  # LibrariesController, or in your router and rack
-  # middleware. Be sure to keep this updated too.
-  let(:valid_headers) do
-    {}
-  end
-
   describe 'GET /index' do
+    let!(:user) { create(:user) }
+    let!(:purchase_recent) { create(:purchase_recent, user: user) }
+    let!(:purchase_two_days_old) { create(:purchase_two_days_old, user: user) }
+    let!(:purchase_one_day_old) { create(:purchase_one_day_old, user: user) }
+    let!(:purchase_too_old) { create(:purchase_old, user: user) }
     it 'renders a successful response' do
-      Library.create! valid_attributes
-      get libraries_url, headers: valid_headers, as: :json
+      get user_libraries_url user_id: user.id, as: :json
+
       expect(response).to be_successful
+    end
+
+    it 'should return purchases by expiration date' do
+      get user_libraries_url user_id: user.id, as: :json
+
+      response_hash = JSON.parse(response.body)
+      obtained_response = []
+      response_hash['data'].each do |purchase|
+        obtained_response << purchase['attributes']['created_at']
+      end
+      expect(obtained_response[0].to_time < obtained_response[1].to_time && obtained_response[1].to_time < obtained_response[2].to_time).to be true
+    end
+
+    it 'should not return purchases older than the date expiration' do
+      get user_libraries_url user_id: user.id, as: :json
+
+      response_hash = JSON.parse(response.body)
+      obtained_response = []
+      response_hash['data'].each do |purchase|
+        obtained_response << purchase
+      end
+      expect(obtained_response.size).to eq(3)
     end
   end
 end

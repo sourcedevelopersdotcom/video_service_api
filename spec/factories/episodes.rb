@@ -5,4 +5,11 @@ FactoryBot.define do
     number { 1 }
     season { nil }
   end
+
+  factory :episode_new, class: Episode do
+    title { Faker::Movie.title }
+    plot { Faker::Movie.quote }
+    number { Faker::Number.decimal(l_digits: 2) }
+    season { nil }
+  end
 end
