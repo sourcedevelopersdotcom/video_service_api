@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  mysqlServer:
+    image: mysql:latest
+    container_name: "mysql_latest"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+  redis:
+    image: redis
+    container_name: "redisdb"
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379" 
+
+volumes:
+  mysql_data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '$PWD/volumes/mysql'
+  redis_data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '$PWD/volumes/redis'
