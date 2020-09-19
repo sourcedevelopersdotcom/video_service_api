@@ -1,13 +1,12 @@
 class SeasonsController < ApplicationController
-  before_action :set_season, only: %i[show update destroy]
-
   # GET /seasons
   def index
     @seasons = Season.all
-    # options = { include: ['episodes'] }
+
+    options = { include: %i[content options] }
 
     json = Rails.cache.fetch(Season.cache_key(@seasons)) do
-      SeasonSerializer.new(@seasons).serializable_hash.to_json
+      SeasonSerializer.new(@seasons, options).serializable_hash.to_json
     end
 
     render json: json

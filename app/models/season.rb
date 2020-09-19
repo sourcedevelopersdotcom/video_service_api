@@ -1,5 +1,5 @@
 class Season < ApplicationRecord
-  has_one :content, as: :contentable, dependent: :destroy
+  has_one :content, as: :contentable, dependent: :destroy, touch: true
   has_many :options, through: :content
   has_many :episodes, -> { order(number: :asc) }, dependent: :destroy
   include TitlePlotPresenceValidations

@@ -1,12 +1,12 @@
 class MoviesController < ApplicationController
-  before_action :set_movie, only: %i[show update destroy]
-
   # GET /movies
   def index
     @movies = Movie.all
 
+    options = { include: %i[content options] }
+
     json = Rails.cache.fetch(Movie.cache_key(@movies)) do
-      MovieSerializer.new(@movies).serializable_hash.to_json
+      MovieSerializer.new(@movies, options).serializable_hash.to_json
     end
 
     render json: json

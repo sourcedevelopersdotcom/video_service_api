@@ -1,5 +1,5 @@
 class Movie < ApplicationRecord
-  has_one :content, as: :contentable, dependent: :destroy
+  has_one :content, as: :contentable, dependent: :destroy, touch: true
   has_many :options, through: :content
   include TitlePlotPresenceValidations
 

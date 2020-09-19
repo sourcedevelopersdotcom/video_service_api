@@ -6,8 +6,7 @@ class SeasonSerializer
   attribute :episodes do |obj|
     EpisodeSerializer.new(obj.episodes)
   end
-  # has_many :episodes
-  # has_many :options
-  # has_one :content
-  # attribute :content { |obj| }
+
+  has_one :content, serializer: ContentSerializer
+  has_many :options, serializer: OptionSerializer
 end
