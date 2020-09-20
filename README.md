@@ -94,7 +94,7 @@ b15833cbca18        redis               "docker-entrypoint.s…"   2 days ago   
 
 ### Project
 
-Clone the project and install the ruby version specified in the *specification* section in you system. Once installed, execute the next command:
+Clone the project and install the ruby version specified in the *specification* section in your system. Once installed, execute the next command:
 
 ```command
 foo@bar:~$ bundle install
@@ -118,7 +118,7 @@ foo@bar:~$ bundle exec rspec
 
 ### Services
 
-For caching purposes we have used Sidekiq as a background mechanism to create all the caches dependencies, i.e: when the cache for the episodes be expired due to a creation/deletion/update operation in the database, all the new caching dependant of episodes will be created again as a background process: *episodes &rarr; season &rarr; content cache.*
+For caching purposes we have used Sidekiq as a background mechanism to create all the caches dependencies, i.e: when the cache for the episodes has expired due to a creation/deletion/update operation in the database, all the new caching dependant of episodes will be created again as a background process: *episodes &rarr; season &rarr; content cache.*
 
 To execute *Sidekiq* execute this command in your shell:
 
@@ -176,8 +176,8 @@ class MovieSerializer
   include FastJsonapi::ObjectSerializer
 	cache_options enabled: true, cache_length: 1.hour
 ```
-We have set in this case a TTL of 1 hour for the cache register for an example purpose, but it also will expire and be regenerated if there's a modification with a CRUD operation. 
-We'll do that implementing the required `cache_key` method in the corresponding model.
+We have set in this case a TTL of 1 hour for the cache register as an example purpose, but it also will expire and be regenerated if there's a modification with a CRUD operation. 
+We'll do that implementing the required `cache_key` method in the corresponding model as the [documentation](https://github.com/Netflix/fast_jsonapi#caching) specifies.
 
 
 #### Controller responses caching
