@@ -6,8 +6,9 @@ class CreateSeasonsJsonCacheJob < ApplicationJob
 
     Rails.cache.delete(_season) unless _season.nil?
     Rails.cache.delete(Season.cache_key(seasons))
+    options = { include: %i[content options] }
     Rails.cache.fetch(Season.cache_key(seasons)) do
-      SeasonSerializer.new(seasons).serializable_hash.to_json
+      Api::V1::SeasonSerializer.new(seasons, options).serializable_hash.to_json
     end
   end
 end

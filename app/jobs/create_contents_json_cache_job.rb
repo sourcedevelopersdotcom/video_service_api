@@ -6,8 +6,9 @@ class CreateContentsJsonCacheJob < ApplicationJob
 
     Rails.cache.delete(_content) unless _content.nil?
     Rails.cache.delete(Content.cache_key(contents))
+    options = { include: [:options] }
     Rails.cache.fetch(Content.cache_key(contents)) do
-      ContentSerializer.new(contents).serializable_hash.to_json
+      Api::V1::ContentSerializer.new(contents, options).serializable_hash.to_json
     end
     Rails.cache.delete_matched('serializer=users*')
     User.all.each { |user| CreatePurchasesJsonCacheJob.perform_later(user) }

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe '/libraries', type: :request do
+RSpec.describe Api::V1::LibrariesController, type: :request do
   describe 'GET /index' do
     let!(:user) { create(:user) }
     let!(:purchase_recent) { create(:purchase_recent, user: user) }
@@ -8,13 +8,13 @@ RSpec.describe '/libraries', type: :request do
     let!(:purchase_one_day_old) { create(:purchase_one_day_old, user: user) }
     let!(:purchase_too_old) { create(:purchase_old, user: user) }
     it 'renders a successful response' do
-      get user_libraries_url user_id: user.id, as: :json
+      get api_v1_user_libraries_url user_id: user.id, as: :json
 
       expect(response).to be_successful
     end
 
     it 'should return purchases by expiration date' do
-      get user_libraries_url user_id: user.id, as: :json
+      get api_v1_user_libraries_url user_id: user.id, as: :json
 
       response_hash = JSON.parse(response.body)
       obtained_response = []
@@ -25,7 +25,7 @@ RSpec.describe '/libraries', type: :request do
     end
 
     it 'should not return purchases older than the date expiration' do
-      get user_libraries_url user_id: user.id, as: :json
+      get api_v1_user_libraries_url user_id: user.id, as: :json
 
       response_hash = JSON.parse(response.body)
       obtained_response = []

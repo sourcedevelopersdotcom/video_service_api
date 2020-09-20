@@ -151,13 +151,13 @@ The application has been modeled following the next diagram:
 
 The endpoints created for the applications are: 
 
-HTTP Verb | Path             | Controller#Action | Used for                                    
---------- | ---------------- | ----------------- | --------------------------------------------
-GET       | /contents        | contents#index    | display a list of all contents (Movies and Seasons) ordered by date creation             
-GET       | /movies          | movies#index      | display a list of Movies ordered by creation
-GET       | /seasons         | seasons#index     | display a list of Seasons ordered by creation including the list of episodes ordered by number
-POST      | /purchases       | purchases#create  | perform a purchase of a content if there is already in the user library
-GET       | /users/:user_id/libraries         | libraries#index     | get the user library ordered by the remaining time to watch the content
+HTTP Verb | Path                               | Controller#Action        | Used for                                    
+--------- | ---------------------------------- | ------------------------ | --------------------------------------------
+GET       | /api/v1/contents                   | api/v1/contents#index    | display a list of all contents (Movies and Seasons) ordered by date creation             
+GET       | /api/v1/movies                     | api/v1/movies#index      | display a list of Movies ordered by creation
+GET       | /api/v1/seasons                    | api/v1/seasons#index     | display a list of Seasons ordered by creation including the list of episodes ordered by number
+POST      | /api/v1/purchases                  | api/v1/purchases#create  | perform a purchase of a content if there is already in the user library
+GET       | /api/v1/users/:user_id/libraries   | api/v1/libraries#index   | get the user library ordered by the remaining time to watch the content
 
 
 
