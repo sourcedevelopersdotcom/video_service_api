@@ -4,7 +4,11 @@ class Purchase < ApplicationRecord
 
   scope :where_user, ->(user) { where user_id: user }
 
-  validate -> { errors.add(:purchase, 'Content already in Library') if Library.where_user(user).where_option(option).present? }
+  validate lambda {
+             if Library.where_user(user).where_option(option).present?
+               errors.add(:purchase, 'Content already in Library')
+             end
+           }
 
   after_commit :create_json_cache
 
