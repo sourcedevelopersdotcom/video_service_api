@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe '/contents', type: :request do
+RSpec.describe Api::V1::ContentsController, type: :request do
   let!(:movie1) { create(:movie_new, title: 'Movie 1', created_at: Time.now) }
   let!(:season1) { create(:season_new, title: 'Season 1',  created_at: Time.now - 1.days) }
   let!(:season2) { create(:season_new, title: 'Season 2',  created_at: Time.now - 2.days) }
@@ -11,12 +11,12 @@ RSpec.describe '/contents', type: :request do
   let!(:content4) { create(:content, :for_season, contentable: season2) }
   describe 'GET /index' do
     it 'renders a successful response' do
-      get contents_url, as: :json
+      get api_v1_contents_url, as: :json
       expect(response).to be_successful
     end
 
     it 'returns results order by creation date' do
-      get contents_url, as: :json
+      get api_v1_contents_url, as: :json
       response_hash = JSON.parse(response.body)
       obtained_response_times = []
       obtained_response_names = []

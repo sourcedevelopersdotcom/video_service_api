@@ -7,7 +7,7 @@ class CreatePurchasesJsonCacheJob < ApplicationJob
 
     Rails.cache.delete(Purchase.cache_key(user))
     Rails.cache.fetch(Purchase.cache_key(user)) do
-      PurchaseSerializer.new(purchases).serializable_hash.to_json
+      Api::V1::PurchaseSerializer.new(purchases).serializable_hash.to_json
     end
   end
 end

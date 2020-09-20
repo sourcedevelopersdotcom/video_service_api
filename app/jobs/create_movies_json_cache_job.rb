@@ -6,8 +6,9 @@ class CreateMoviesJsonCacheJob < ApplicationJob
 
     Rails.cache.delete(_movie) unless _movie.nil?
     Rails.cache.delete(Movie.cache_key(movies))
+    options = { include: %i[content options] }
     Rails.cache.fetch(Movie.cache_key(movies)) do
-      MovieSerializer.new(movies).serializable_hash.to_json
+      Api::V1::MovieSerializer.new(movies, options).serializable_hash.to_json
     end
   end
 end

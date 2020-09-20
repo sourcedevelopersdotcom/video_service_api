@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe '/seasons', type: :request do
+RSpec.describe Api::V1::SeasonsController, type: :request do
   let!(:season1) { create(:season_new, title: 'S1', created_at: Time.now) }
   let!(:season2) { create(:season_new, title: 'S2', created_at: Time.now - 2.days) }
   let!(:season3) { create(:season_new, title: 'S3', created_at: Time.now - 1.days) }
@@ -15,12 +15,12 @@ RSpec.describe '/seasons', type: :request do
   let!(:s3ep3) { create(:episode_new, title: 'S3E3', number: 3, season: season3) }
   describe 'GET /index' do
     it 'renders a successful response' do
-      get seasons_url, as: :json
+      get api_v1_seasons_url, as: :json
       expect(response).to be_successful
     end
 
     it 'returns results order by creation date' do
-      get seasons_url, as: :json
+      get api_v1_seasons_url, as: :json
       response_hash = JSON.parse(response.body)
 
       obtained_response = []
@@ -32,7 +32,7 @@ RSpec.describe '/seasons', type: :request do
     end
 
     it 'returns also episodes ordered by their numbers' do
-      get seasons_url, as: :json
+      get api_v1_seasons_url, as: :json
       response_hash = JSON.parse(response.body)
       obtained_response = []
       episodes = []
